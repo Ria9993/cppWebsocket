@@ -1,6 +1,6 @@
 FROM debian:latest
 
-RUN apt update
+RUN apt update -y
 RUN apt install -y \
     wget \
     php  \
@@ -13,6 +13,7 @@ RUN apt install -y \
     php7.4-xml \
     php7.4-cli \
     php7.4-fpm
+RUN apt install -y dump-init
 
 
 WORKDIR /var/www
@@ -26,8 +27,10 @@ RUN rm -rf wordpress latest.tar.gz
 RUN mv /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php
 
 
-COPY ./Installer.sh /tmp
+COPY ./Startup.sh /tmp
 RUN chmod +x /tmp/Installer.sh
 
+STOPSIGNAL SIGQUIT
 
-ENTRYPOINT /tmp/Installer.sh
+ENTRYPOINT ["/usr/bin/dumb-init","--"]
+CMD        ["/tmp/Startup.sh"]
