@@ -20,12 +20,13 @@ done
 echo "Checked MariaDB alive."
 
 
-# Disable nginx
+# Set up default listening port and owner 
 PHP_VERSION=7.4
 PHP_FPM_POOL_CONF="/etc/php/$PHP_VERSION/fpm/pool.d/www.conf"
 sed -i 's|.*listen = .*$|listen = 0.0.0.0:9000|g' ${PHP_FPM_POOL_CONF}
 sed -i 's|.*listen\.owner = .*$|listen\.owner = nginx|g' ${PHP_FPM_POOL_CONF}
 sed -i 's|.*listen\.group = .*$|listen\.group = nginx|g' ${PHP_FPM_POOL_CONF}
+sed -i 's|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g' ${PHP_FPM_POOL_CONF}
 sed -i 's|;clear_env|clear_env|g' ${PHP_FPM_POOL_CONF}
 
 # Monitoring environment variables
