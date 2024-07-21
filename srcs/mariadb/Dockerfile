@@ -15,6 +15,7 @@ COPY ./Startup.sh /tmp/.
 RUN chmod +x /tmp/Startup.sh
 
 COPY ./my.cnf /etc/my.cnf
+RUN chmod 755 /etc/my.cnf
 
 ENTRYPOINT ["/usr/bin/dumb-init","--"]
 CMD        ["sh", "-c", "/tmp/Startup.sh"]
