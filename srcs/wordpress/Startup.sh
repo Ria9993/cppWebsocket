@@ -1,10 +1,4 @@
-
-# Stop and log when error occurs
-set -x
-set -e
-
-# Wait for MariaDB 
-echo "Waiting for MariaDB:${DB_PORT}..."
+#!/bin/sh
 
 # @see https://dev.mysql.com/doc/refman/8.0/en/mysqladmin.html
 POLLING_INTERVAL=1
@@ -43,7 +37,7 @@ if ! [ -e "/var/www/wordpress/wp-config.php" ]; then
   # @see https://make.wordpress.org/cli/handbook/guides/installing/#recommended-installation
   curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
   chmod +x wp-cli.phar
-  mv wp-cli.phar /usr/local/bin/wp
+  mv -f wp-cli.phar /usr/local/bin/wp
 
   wp core download --allow-root
   wp config create --allow-root \

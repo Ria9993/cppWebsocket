@@ -1,8 +1,4 @@
-
-# Log when error occurs
-set -x
-set +e
-
+#!/bin/sh
 
 # Open external access to MariaDB
 if ! [ -f //etc/mysql/mariadb.cnf ]; then
@@ -27,4 +23,6 @@ mysql -uroot -e "FLUSH PRIVILEGES;"
 while ! mysqladmin ping; do
     sleep 1
 done
-service mariadb stop && mysqld;
+
+service mariadb stop
+exec mysqld

@@ -1,0 +1,66 @@
+networks:
+  localnet:
+    name: localnet
+    driver: bridge
+
+volumes:
+  db-volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${VOLUME_BASE_PATH}/data/db
+  wp-volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${VOLUME_BASE_PATH}/data/wp
+
+
+services:
+  mariadb:
+    build: ./mariadb
+    image: mariadb
+    container_name: mariadb
+    pull_policy: never
+    env_file: .env
+    networks:
+      - localnet
+    volumes:
+      - db-volume:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+
+  wordpress:
+    build: ./wordpress
+    image: wordpress
+    container_name: wordpress
+    pull_policy: never
+    env_file: .env
+    networks:
+      - localnet
+    volumes:
+      - wp-volume:/var/www/html
+    expose:
+      - 9000
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+
+  nginx:
+    build: ./nginx
+    image: nginx
+    container_name: nginx
+    pull_policy: never
+    networks:
+      - localnet
+    volumes:
+      - wp-volume:/var/www/html
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+      - mariadb
+    restart: unless-stopped
