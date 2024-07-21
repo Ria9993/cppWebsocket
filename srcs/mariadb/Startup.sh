@@ -2,15 +2,16 @@
 
 # Open external access to MariaDB
 
-mysql_install_db
+# mysql_install_db
 
 service mysql start
+
 
 if [ ! -d "/var/lib/mysql/data/wordpress" ]; then
   # sed -i 's/bind-address/\# bind-address/g'  /etc/mysql/mariadb.cnf
 
   # DB Query
-  mysql -uroot -e "\
+  mysql -e "\
         CREATE DATABASE IF NOT EXISTS $DB_NAME; \
         CREATE USER IF NOT EXISTS '{$DB_USER}'@'%' IDENTIFIED BY '$DB_USER_PW'; \
         GRANT ALL ON $DB_NAME.* TO '{$DB_USER}'@'%'; \
@@ -19,5 +20,3 @@ if [ ! -d "/var/lib/mysql/data/wordpress" ]; then
 fi
 
 service mysql stop
-
-mysqld

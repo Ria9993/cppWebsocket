@@ -11,10 +11,10 @@ RUN apt install -y dumb-init
 COPY ./Startup.sh /tmp/.
 RUN chmod +x /tmp/Startup.sh
 
-COPY ./my.cnf /etc/mysql/mariadb.conf.d/.
-RUN chmod 755 /etc/mysql/mariadb.conf.d/my.cnf
+COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/.
 
 EXPOSE 3306
 
-ENTRYPOINT ["/usr/bin/dumb-init","--"]
-CMD        ["sh", "-c", "/tmp/Startup.sh"]
+RUN bash /tmp/Startup.sh
+
+CMD /usr/bin/mysqld_safe
