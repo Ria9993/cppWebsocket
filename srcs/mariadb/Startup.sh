@@ -23,4 +23,5 @@ if [ ! -e "/run/mysqld/mysqld.sock" ]; then
 
 fi
 
-mysqld_safe --datadir=/var/lib/mysql/data --user=root --port=3306
+service mysql start
+mysqld_safe --datadir=/var/lib/mysql/data --user=root --port=3306 --default-file=/tmp

@@ -13,7 +13,7 @@ RUN apt install -y \
     php7.4-xml \
     php7.4-cli \
     php7.4-fpm
-RUN apt install -u \
+RUN apt install -y \
     mariadb-client
 RUN apt install -y dumb-init
 

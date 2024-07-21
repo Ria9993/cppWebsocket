@@ -1,11 +1,19 @@
 #!/bin/sh
 
+
+# Monitoring environment variables
+echo "env[DB_NAME] = $DB_DATABASE" >> ${PHP_FPM_POOL_CONF}
+echo "env[DB_TABLE] = $DB_TABLE" >> ${PHP_FPM_POOL_CONF}
+echo "env[DB_HOST] = $DB_HOST" >> ${PHP_FPM_POOL_CONF}
+echo "env[DB_USER] = $DB_USER" >> ${PHP_FPM_POOL_CONF}
+echo "env[DB_PASSWORD] = $DB_USER_PW" >> ${PHP_FPM_POOL_CONF}
+
 # @see https://dev.mysql.com/doc/refman/8.0/en/mysqladmin.html
 POLLING_INTERVAL=1
 POLLING_COUNTER=0
 while ! mysqladmin ping --silent -hmariadb -u$DB_USER -p$DB_USER_PW; do
   POLLING_COUNTER=$((POLLING_COUNTER + 1))
-  if ${POLLING_COUNTER} == ${WAIT_TIMEOUT}; then
+  if [ "$POLLING_COUNTER" -eq "$WAIT_TIMEOUT" ]; then
     echo "MariaDB is not ready. (WaitTime=${POLLING_COUNTER})"
     exit 1
   fi
@@ -22,13 +30,6 @@ sed -i 's|.*listen\.owner = .*$|listen\.owner = nginx|g' ${PHP_FPM_POOL_CONF}
 sed -i 's|.*listen\.group = .*$|listen\.group = nginx|g' ${PHP_FPM_POOL_CONF}
 sed -i 's|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g' ${PHP_FPM_POOL_CONF}
 sed -i 's|;clear_env|clear_env|g' ${PHP_FPM_POOL_CONF}
-
-# Monitoring environment variables
-echo "env[DB_NAME] = $DB_DATABASE" >> ${PHP_FPM_POOL_CONF}
-echo "env[DB_TABLE] = $DB_TABLE" >> ${PHP_FPM_POOL_CONF}
-echo "env[DB_HOST] = $DB_HOST" >> ${PHP_FPM_POOL_CONF}
-echo "env[DB_USER] = $DB_USER" >> ${PHP_FPM_POOL_CONF}
-echo "env[DB_PASSWORD] = $DB_USER_PW" >> ${PHP_FPM_POOL_CONF}
 
 
 # wp-cli. Set up the WordPress
