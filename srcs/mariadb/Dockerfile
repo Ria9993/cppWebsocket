@@ -5,8 +5,7 @@ RUN apt update -y
 RUN apt install -y \
     wget \
     curl \
-    mariadb \
-    mariadb-client
+    mariadb-server
 RUN apt install -y dumb-init
     
 RUN mariadb-install-db --datadir=/var/lib/mysql/data --auth-root-authentication-method=normal
