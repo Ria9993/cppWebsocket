@@ -29,8 +29,8 @@ services:
       - localnet
     volumes:
       - db-volume:/var/lib/mysql
-    ports:
-      - "3306:3306"
+    expose:
+      - 3306
     restart: unless-stopped
 
   wordpress:
