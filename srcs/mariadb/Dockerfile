@@ -14,8 +14,8 @@ RUN mariadb-install-db --datadir=/var/lib/mysql/data --auth-root-authentication-
 COPY ./Startup.sh /tmp/.
 RUN chmod +x /tmp/Startup.sh
 
-COPY ./my.cnf /etc/my.cnf
-RUN chmod 755 /etc/my.cnf
+COPY ./my.cnf /etc/mysql/mariadb.conf.d/.
+RUN chmod 755 /etc/mysql/mariadb.conf.d/my.cnf
 
 ENTRYPOINT ["/usr/bin/dumb-init","--"]
 CMD        ["sh", "-c", "/tmp/Startup.sh"]

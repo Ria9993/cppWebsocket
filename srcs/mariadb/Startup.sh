@@ -1,6 +1,8 @@
 #!/bin/sh
 
 # Open external access to MariaDB
+service mysql start
+
 if [ ! -e "/run/mysqld/mysqld.sock" ]; then
   mysql_install_db
   mysqld_safe 
@@ -23,5 +25,4 @@ if [ ! -e "/run/mysqld/mysqld.sock" ]; then
 
 fi
 
-service mysql start
 mysqld_safe --datadir=/var/lib/mysql/data --user=root --port=3306 --default-file=/tmp
