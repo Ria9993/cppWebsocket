@@ -5,6 +5,7 @@ RUN apt update -y
 RUN apt install -y \
     wget \
     curl \
+    mariadb-server \
     mariadb-client
 RUN apt install -y dumb-init
     
