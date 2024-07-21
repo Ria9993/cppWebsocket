@@ -3,7 +3,7 @@
 # @see https://dev.mysql.com/doc/refman/8.0/en/mysqladmin.html
 POLLING_INTERVAL=1
 POLLING_COUNTER=0
-while ! mysql --host=$DB_HOST -u$DB_USER -p$DB_USER_PW -e '\c'; do
+while ! mysqladmin ping --silent -hmariadb -u$DB_USER -p$DB_USER_PW; do
   POLLING_COUNTER=$((POLLING_COUNTER + 1))
   if ${POLLING_COUNTER} == ${WAIT_TIMEOUT}; then
     echo "MariaDB is not ready. (WaitTime=${POLLING_COUNTER})"
