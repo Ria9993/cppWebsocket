@@ -6,7 +6,7 @@ RUN apt update && apt install -y \
 
 RUN /usr/bin/mysql_install_db --datadir=/var/lib/mysql/data --auth-root-authentication-method=normal
 
-RUN mkdir -p /run/mysqld/\
+RUN mkdir -p /var/run/mysqld/\
 && mkdir -p /var/lib/mysql/data/\
 \
 && chmod 755 -R /var/lib/mysql\
