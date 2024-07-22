@@ -36,5 +36,7 @@ COPY ./50-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 # ENTRYPOINT ["sh"]
 STOPSIGNAL SIGQUIT
 
+EXPOSE 3306
+
 ENTRYPOINT	[ "/usr/local/bin/dumb-init", "--" ]
 CMD			[ "sh", "-c", "/tmp/Startup.sh" ]
