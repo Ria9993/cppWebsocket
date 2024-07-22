@@ -2,6 +2,10 @@
 
 [mysqld_safe]
 nice = 0
+socket = /var/lib/mysql/mysql.sock
+
+[client]
+socket = /var/lib/mysql/mysql.sock
 
 [mysqld]
 user=root
@@ -9,7 +13,9 @@ port=3306
 
 # set db directory
 datadir=/var/lib/mysql/data
-socket=/var/run/mysqld/mysqld.sock
+
+[mysqld]
+socket = /var/lib/mysql/mysql.sock
 
 skip-networking=0
 bind-address=0.0.0.0
