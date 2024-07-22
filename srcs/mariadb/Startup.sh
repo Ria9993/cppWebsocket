@@ -17,18 +17,11 @@ if [ ! -d /var/lib/mysql/data/$DB_NAME ]; then
   /usr/share/mariadb/mysql.server start
 
   # DB Query
-  # mysql -e "\
-  #       CREATE DATABASE IF NOT EXISTS $DB_NAME; \
-  #       CREATE USER IF NOT EXISTS '{$DB_USER}'@'%' IDENTIFIED BY '$DB_USER_PW'; \
-  #       GRANT ALL ON $DB_NAME.* TO '{$DB_USER}'@'%'; \
-  #       ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ADMIN_PW'; \
-  #       FLUSH PRIVILEGES;"
-
-  mysql -e "\
+   mysql -e "\
     CREATE DATABASE IF NOT EXISTS ${DB_NAME} DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci; \
     CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_USER_PW}'; \
     GRANT ALL ON ${DB_NAME}.* TO '${DB_USER}'@'%'; \
-    ALTER USER '${DB_ADMIN}'@'localhost' IDENTIFIED BY '{$DB_ADMIN_PW}'; \
+    ALTER USER 'root'@'localhost' IDENTIFIED BY '{$DB_ADMIN_PW}'; \
     FLUSH PRIVILEGES; \
     "
   mysqladmin --user=root shutdown

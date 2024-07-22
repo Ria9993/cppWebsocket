@@ -1,7 +1,6 @@
 FROM alpine:3.19.2
 
 WORKDIR /
-# COPY ./config/my.cnf /etc/.
 COPY ./Startup.sh /tmp/.
 
 RUN apk update\
@@ -33,7 +32,6 @@ RUN apk update\
 
 COPY ./50-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
-# ENTRYPOINT ["sh"]
 STOPSIGNAL SIGQUIT
 
 EXPOSE 3306
