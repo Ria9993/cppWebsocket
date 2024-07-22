@@ -24,11 +24,13 @@ if [ ! -d /var/lib/mysql/data/$DB_NAME ]; then
   #       ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ADMIN_PW'; \
   #       FLUSH PRIVILEGES;"
 
-  mysql -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME};"
-  mysql -e "CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY '${DB_USER_PW}';"
-  mysql -e "GRANT ALL ON ${DB_NAME}.* TO '${DB_USER}'@'%';"
-  mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ADMIN_PW}';"
-  mysql -e "FLUSH PRIVILEGES;"
+  mysql -e "\
+    CREATE DATABASE IF NOT EXISTS ${DB_TABLE_WORDPRESS} DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci; \
+    CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_USER_PWD}'; \
+    GRANT ALL ON ${DB_TABLE_WORDPRESS}.* TO '${DB_USER}'@'%'; \
+    ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ADMIN_PWD}'; \
+    FLUSH PRIVILEGES; \
+    "
   mysqladmin --user=root shutdown
 fi
 
