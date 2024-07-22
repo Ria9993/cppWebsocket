@@ -1,10 +1,10 @@
 
 FROM debian:buster
 
-RUN apt update -y
-RUN apt install -y \
+RUN sudo apt update -y
+RUN sudo apt install -y \
     mariadb-server
-RUN apt install -y dumb-init
+RUN sudo apt install -y dumb-init
     
 # RUN mariadb-install-db --datadir=/var/lib/mysql/data --auth-root-authentication-method=normal
 

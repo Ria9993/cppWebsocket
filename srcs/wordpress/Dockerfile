@@ -1,21 +1,20 @@
 FROM debian:11
 
-RUN apt update -y
-RUN apt install -y \
+RUN sudo apt update -y && apt install -y \
     wget \
     php  \
     curl \
     apache2
-RUN apt install -y \
+RUN sudo apt install -y \
     php7.4 \
     php7.4-curl \
     php7.4-mbstring \
     php7.4-xml \
     php7.4-cli \
     php7.4-fpm
-RUN apt install -y \
+RUN sudo apt install -y \
     mariadb-client
-RUN apt install -y dumb-init
+RUN sudo apt install -y dumb-init
 
 
 WORKDIR /var/www
