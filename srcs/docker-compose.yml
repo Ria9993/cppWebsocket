@@ -3,7 +3,7 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: "172.17.0.0/24"
+        - subnet: "172.16.0.0/24"
 
 volumes:
   db-volume:
@@ -29,7 +29,7 @@ services:
     env_file: .env
     networks:
       localnet:
-        ipv4_address: 172.17.0.5
+        ipv4_address: 172.16.0.5
     volumes:
       - db-volume:/var/lib/mysql/data
     expose:
@@ -45,7 +45,7 @@ services:
     env_file: .env
     networks:
       localnet:
-        ipv4_address: 172.17.0.7
+        ipv4_address: 172.16.0.7
     volumes:
       - wp-volume:/var/www/html
     expose:
@@ -61,7 +61,7 @@ services:
     pull_policy: never
     networks:
       localnet:
-        ipv4_address: 172.17.0.6
+        ipv4_address: 172.16.0.6
     volumes:
       - wp-volume:/var/www/html
     ports:
