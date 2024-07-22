@@ -13,7 +13,7 @@ echo "env[DB_PASSWORD] = $DB_USER_PW" >> ${PHP_FPM_POOL_CONF}
 POLLING_INTERVAL=1
 POLLING_COUNTER=0
 
-until mysql --host=$DB_HOST --user=$DB_USER --password=$DB_USER_PWD -e '\c'; do
+until mysql --host=$DB_HOST --user=$DB_USER --password=$DB_USER_PW -e '\c'; do
   echo >&2 "mariadb is unavailable - sleeping"
   POLLING_COUNTER=$((POLLING_COUNTER + 1))
   if [ "$POLLING_COUNTER" -eq "$WAIT_TIMEOUT" ]; then
