@@ -27,7 +27,7 @@ COPY ./Startup.sh /tmp/.
 RUN chmod +x /tmp/Startup.sh
 
 COPY ./50-server.cnf /etc/my.cnf.d/mariadb-server.cnf
-RUN mysql_install_db
+# RUN mysql_install_db
 
 
 EXPOSE 3306
