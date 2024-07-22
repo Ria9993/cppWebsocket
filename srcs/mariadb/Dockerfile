@@ -2,7 +2,7 @@
 FROM debian:buster
 
 RUN apt update && apt install -y \
-    mariadb-server dumb-init && \
+    mariadb-server dumb-init\
 && mkdir -p /run/mysqld/\
 && mkdir -p /var/lib/mysql/data/\
 \
