@@ -1,16 +1,16 @@
 
 FROM debian:11
 
-RUN sudo apt update -y
-RUN sudo apt install -y \
+RUN apt update -y
+RUN apt install -y \
     wget \
     curl \
     nginx \
     openssl
-RUN sudo apt install -y dumb-init
+RUN apt install -y dumb-init
 
 COPY ./Startup.sh /tmp/.
-RUN sudo chmod +x /tmp/Startup.sh
+RUN chmod +x /tmp/Startup.sh
 
 COPY ./nginx.conf /etc/nginx/http.d/nginx.conf
 

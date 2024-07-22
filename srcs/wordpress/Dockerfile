@@ -1,31 +1,27 @@
 FROM debian:11
 
-RUN sudo apt update -y && apt install -y \
+RUN apt update -y && apt install -y \
     wget \
     php  \
     curl \
-    apache2
-RUN sudo apt install -y \
+    apache2\
     php7.4 \
     php7.4-curl \
     php7.4-mbstring \
     php7.4-xml \
     php7.4-cli \
-    php7.4-fpm
-RUN sudo apt install -y \
-    mariadb-client
-RUN sudo apt install -y dumb-init
-
+    php7.4-fpm\
+    mariadb-client\
+    dumb-init
 
 WORKDIR /var/www
-RUN wget https://wordpress.org/latest.tar.gz
-RUN tar -xvf latest.tar.gz
+RUN wget https://wordpress.org/latest.tar.gz\
+&& tar -xvf latest.tar.gz\
+&& mkdir -p /var/www/wordpress\
+&& rm -rf wordpress latest.tar.gz
 
-RUN mkdir -p /var/www/wordpress
 # RUN mv -f wordpress/* /var/www/wordpress
 # RUN chown -R www-data:www-data /var/www/wordpress
-RUN rm -rf wordpress latest.tar.gz
-
 
 COPY ./Startup.sh /tmp/.
 RUN chmod +x /tmp/Startup.sh
