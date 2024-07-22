@@ -60,4 +60,4 @@ else
 fi
 
 # Start PHP-FPM without daemonize
-/usr/sbin/php-fpm7.4 -F
+./usr/sbin/php-fpm8.2 -F

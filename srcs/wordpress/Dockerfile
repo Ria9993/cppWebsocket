@@ -1,18 +1,7 @@
 FROM debian:11
 
 RUN apt update -y && apt install -y \
-    wget \
-    php  \
-    curl \
-    apache2\
-    php7.4 \
-    php7.4-curl \
-    php7.4-mbstring \
-    php7.4-xml \
-    php7.4-cli \
-    php7.4-fpm\
-    mariadb-client\
-    dumb-init
+curl wget php8.2 php8.2-fpm php8.2-cgi php8.2-phar php8.2-mysqli php8.2-curl php8.2-iconv mariadb-client
 
 WORKDIR /var/www
 RUN wget https://wordpress.org/latest.tar.gz\
