@@ -12,7 +12,7 @@ RUN openssl req -newkey rsa:4096 -days 365 -x509 -nodes \
 && rm /etc/nginx/http.d/default.conf\
 && rm /etc/nginx/nginx.conf
 
-COPY		config/nginx.conf /etc/nginx/nginx.conf
+COPY		./nginx.conf /etc/nginx/nginx.conf
 
 STOPSIGNAL SIGQUIT
 
