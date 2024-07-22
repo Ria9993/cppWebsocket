@@ -9,11 +9,12 @@ set -x
 
 
 
-service mysql start
 
 
-if [ ! -d "/var/lib/mysql/data/wordpress" ]; then
+if [ ! -d /var/lib/mysql/data/$DB_NAME ]; then
   # sed -i 's/bind-address/\# bind-address/g'  /etc/mysql/mariadb.cnf
+  mysql_install_db
+  /usr/share/mariadb/mysql.server start
 
   # DB Query
   # mysql -e "\
@@ -28,9 +29,8 @@ if [ ! -d "/var/lib/mysql/data/wordpress" ]; then
   mysql -e "GRANT ALL ON ${DB_NAME}.* TO '${DB_USER}'@'%';"
   mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ADMIN_PW}';"
   mysql -e "FLUSH PRIVILEGES;"
+  mysqladmin --user=root shutdown
 fi
 
-service mysql stop
 
-
-mysqld_safe
+mysqld_safe --datadir=/var/lib/mysql/data --user=root --port=3306
