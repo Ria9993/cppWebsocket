@@ -1,7 +1,6 @@
 #!/bin/sh
 
-
-# Monitoring environment variables
+PHP_VERSION=7.4
 PHP_FPM_POOL_CONF="/etc/php/$PHP_VERSION/fpm/pool.d/www.conf"
 echo "env[DB_NAME] = $DB_DATABASE" >> ${PHP_FPM_POOL_CONF}
 echo "env[DB_TABLE] = $DB_TABLE" >> ${PHP_FPM_POOL_CONF}
@@ -24,7 +23,6 @@ echo "Checked MariaDB alive."
 
 
 # Set up default listening port and owner 
-PHP_VERSION=7.4
 sed -i 's|.*listen = .*$|listen = 0.0.0.0:9000|g' ${PHP_FPM_POOL_CONF}
 sed -i 's|.*listen\.owner = .*$|listen\.owner = nginx|g' ${PHP_FPM_POOL_CONF}
 sed -i 's|.*listen\.group = .*$|listen\.group = nginx|g' ${PHP_FPM_POOL_CONF}

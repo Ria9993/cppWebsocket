@@ -7,6 +7,9 @@
 #this is read by the standalone daemon and embedded servers
 [server]
 
+[mysqld_safe]
+nice = 0
+
 #this is only for the mysqld standalone daemon
 [mysqld]
 
@@ -53,8 +56,8 @@ query_cache_size        = 16M
 # Both location gets rotated by the cronjob.
 # Be aware that this log type is a performance killer.
 # As of 5.1 you can enable the log at runtime!
-#general_log_file       = /var/log/mysql/mysql.log
-#general_log            = 1
+general_log_file       = /var/log/mysql/mysql.log
+general_log            = 1
 #
 # Error log - should be very few entries.
 #
