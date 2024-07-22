@@ -7,7 +7,6 @@ nice = 0
 user=root
 port=3306
 
-# 데이터베이스들이 저장되는 경로 설정. datadir=/var/lib/mysql => datadir=/var/lib/mysql/data
 datadir=/var/lib/mysql/data
 socket=/run/mysqld/mysqld.sock
 

@@ -1,17 +1,20 @@
+FROM alpine:3.19.2
 
-FROM debian:11
+RUN apk update && apk upgrade && apk add curl openssl nginx\
+&& mkdir -p /etc/nginx/ssl\
+&& wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64\
+&& chmod +x /usr/local/bin/dumb-init\
+&& mkdir -p /var/run/nginx
 
-RUN apt update && apt install -y \
-    wget \
-    curl \
-    nginx \
-    openssl\
-    dumb-init
+RUN openssl req -newkey rsa:4096 -days 365 -x509 -nodes \
+-subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=hyunjunk/CN=hyunjunk\.42.fr" \
+-keyout /etc/nginx/ssl/hyunjunk\.42.fr.key -out /etc/nginx/ssl/hyunjunk\.42.fr.crt\
+&& rm /etc/nginx/http.d/default.conf\
+&& rm /etc/nginx/nginx.conf
 
-COPY ./Startup.sh /tmp/.
-RUN chmod +x /tmp/Startup.sh
+COPY		config/nginx.conf /etc/nginx/nginx.conf
 
-COPY ./nginx.conf /etc/nginx/http.d/nginx.conf
+STOPSIGNAL SIGQUIT
 
-ENTRYPOINT ["/usr/bin/dumb-init","--"]
-CMD        ["sh", "-c", "/tmp/Startup.sh"]
+ENTRYPOINT	[ "/usr/local/bin/dumb-init", "--" ]
+CMD			[ "nginx", "-g", "daemon off;" ]

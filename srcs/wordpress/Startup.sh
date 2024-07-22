@@ -1,7 +1,5 @@
 #!/bin/sh
 
-PHP_VERSION=php82
-PHP_FPM_POOL_CONF="/etc/$PHP_VERSION/php-fpm.d/www.conf"
 echo "env[DB_HOST] = \$DB_HOST" >> /etc/php82/php-fpm.d/www.conf
 echo "env[DB_USER] = \$DB_USER" >> /etc/php82/php-fpm.d/www.conf
 echo "env[DB_USER_PWD] = \$DB_USER_PWD" >> /etc/php82/php-fpm.d/www.conf
@@ -25,7 +23,7 @@ echo "Checked MariaDB alive."
 
 rm -f /var/www/html/wp-config.php
 chown -R www-data:www-data /var/www/html
-/usr/bin/wp config create --allow-root --dbname="$DB_NAME" --dbuser="$DB_USER" --dbpass="$DB_USER_PW" --dbhost="$DB_HOST" --dbcharset=utf8mb4 --path=/var/www/html
+/wp-cli.phar config create --allow-root --dbname="$DB_NAME" --dbuser="$DB_USER" --dbpass="$DB_USER_PW" --dbhost="$DB_HOST" --dbcharset=utf8mb4 --path=/var/www/html
 
 /usr/bin/wp core install --url="$WP_URL" --title="$WP_TITLE" --admin_user="$WP_ADMIN" --admin_password="$WP_ADMIN_PW" --admin_email="$WP_ADMIN_EMAIL" --skip-email --path=/var/www/html --allow-root
 
