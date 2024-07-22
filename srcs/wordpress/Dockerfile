@@ -13,7 +13,7 @@ RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/
 
 RUN rm -f /etc/php82/php-fpm.d/www.conf
 COPY ./Startup.sh /tmp
-COPY ./www.conf /etc/php82/php-fpm.d/.
+COPY ./www.conf /etc/php82/php-fpm.d/www.conf
 RUN chmod +x /tmp/Startup.sh\
 && adduser -D -H -u 82 -s /sbin/nologin www-data -G www-data
 
