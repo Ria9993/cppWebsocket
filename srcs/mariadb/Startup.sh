@@ -12,7 +12,6 @@
 
 
 if [ ! -d /var/lib/mysql/data/$DB_NAME ]; then
-  # sed -i 's/bind-address/\# bind-address/g'  /etc/mysql/mariadb.cnf
   mysql_install_db
   /usr/share/mariadb/mysql.server start
 
