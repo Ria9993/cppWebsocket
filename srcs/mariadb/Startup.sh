@@ -14,7 +14,7 @@
 if [ ! -d /var/lib/mysql/data/$DB_NAME ]; then
   # sed -i 's/bind-address/\# bind-address/g'  /etc/mysql/mariadb.cnf
    mysql_install_db --datadir=/var/lib/mysql/data --auth-root-authentication-method=normal --defaults-file=/etc/my.cnf.d/mariadb-server.cnf\
-  # /usr/share/mariadb/mysql.server start
+   /usr/sbin/mysqld start
 
   # DB Query
   # mysql -e "\
