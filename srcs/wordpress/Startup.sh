@@ -3,7 +3,6 @@
 PHP_VERSION=php82
 PHP_FPM_POOL_CONF="/etc/$PHP_VERSION/php-fpm.d/www.conf"
 echo "env[DB_NAME] = $DB_NAME" >> ${PHP_FPM_POOL_CONF}
-echo "env[DB_TABLE] = $DB_TABLE" >> ${PHP_FPM_POOL_CONF}
 echo "env[DB_HOST] = $DB_HOST" >> ${PHP_FPM_POOL_CONF}
 echo "env[DB_USER] = $DB_USER" >> ${PHP_FPM_POOL_CONF}
 echo "env[DB_USER_PW] = $DB_USER_PW" >> ${PHP_FPM_POOL_CONF}
