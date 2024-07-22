@@ -25,7 +25,7 @@ if [ ! -d /var/lib/mysql/data/$DB_NAME ]; then
   #       FLUSH PRIVILEGES;"
 
   mysql -e "\
-    CREATE DATABASE IF NOT EXISTS ${DB_TABLE_WORDPRESS} DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci; \
+    CREATE DATABASE IF NOT EXISTS ${DB_NAME} DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci; \
     CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_USER_PW}'; \
     GRANT ALL ON ${DB_NAME}.* TO '${DB_USER}'@'%'; \
     ALTER USER '${DB_ADMIN}'@'localhost' IDENTIFIED BY '{$DB_ADMIN_PW}'; \

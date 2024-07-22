@@ -35,7 +35,6 @@ services:
     expose:
       - 3306
     restart: unless-stopped
-    hostname: "mariadb"
 
   
   wordpress:
@@ -54,7 +53,6 @@ services:
     depends_on:
       - mariadb
     restart: unless-stopped
-    hostname: "wordpress"
 
   nginx:
     build: ./nginx
@@ -69,4 +67,3 @@ services:
     ports:
       - "443:443"
     restart: unless-stopped
-    hostname: "nginx"

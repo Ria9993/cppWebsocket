@@ -19,5 +19,7 @@ RUN chmod +x /tmp/Startup.sh\
 
 STOPSIGNAL SIGQUIT
 
+EXPOSE 9000
+
 ENTRYPOINT	[ "/usr/local/bin/dumb-init", "--" ]
 CMD			[ "sh", "-c", "/tmp/Startup.sh" ]
