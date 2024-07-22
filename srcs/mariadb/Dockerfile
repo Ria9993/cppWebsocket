@@ -1,7 +1,7 @@
 
 FROM debian:buster
 
-RUN sudo apt update -y
+RUN apt update && apt upgrade
 RUN sudo apt install -y \
     mariadb-server
 RUN sudo apt install -y dumb-init
