@@ -1,12 +1,13 @@
 #!/bin/sh
 
-PHP_VERSION=7.4
-PHP_FPM_POOL_CONF="/etc/php/$PHP_VERSION/fpm/pool.d/www.conf"
+PHP_VERSION=php82
+PHP_FPM_POOL_CONF="/etc/$PHP_VERSION/php-fpm.d/www.conf"
 echo "env[DB_NAME] = $DB_DATABASE" >> ${PHP_FPM_POOL_CONF}
 echo "env[DB_TABLE] = $DB_TABLE" >> ${PHP_FPM_POOL_CONF}
 echo "env[DB_HOST] = $DB_HOST" >> ${PHP_FPM_POOL_CONF}
 echo "env[DB_USER] = $DB_USER" >> ${PHP_FPM_POOL_CONF}
 echo "env[DB_PASSWORD] = $DB_USER_PW" >> ${PHP_FPM_POOL_CONF}
+
 
 # @see https://dev.mysql.com/doc/refman/8.0/en/mysqladmin.html
 POLLING_INTERVAL=1
@@ -59,5 +60,9 @@ else
   echo "[ASSERTION FAILED] wp-cli is already installed."
 fi
 
+if [ ! -f "/var/www/html/wp-config.php" ]; then
+	exit 1
+fi
+
 # Start PHP-FPM without daemonize
-./usr/sbin/php-fpm8.2 -F
+php-fpm82 --nodaemonize
