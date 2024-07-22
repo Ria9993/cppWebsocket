@@ -23,8 +23,8 @@ RUN mkdir -p /var/run/mysqld/\
 \
 && chown -R root:mysql /var/run/mysqld\
 && chown -R root:mysql /var/lib/mysql\
-\
-&& rm -f /etc/my.cnf.d/mariadb-server.cnf
+# \
+# && rm -f /etc/my.cnf.d/mariadb-server.cnf
     
 
 COPY ./Startup.sh /tmp/.
