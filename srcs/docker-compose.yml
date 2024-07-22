@@ -1,7 +1,9 @@
 networks:
   localnet:
-    name: localnet
-    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.238.0/24"
 
 volumes:
   db-volume:
@@ -26,7 +28,8 @@ services:
     pull_policy: never
     env_file: .env
     networks:
-      - localnet
+      localnet:
+        ipv4_address: 172.16.0.2
     volumes:
       - db-volume:/var/lib/mysql/data
     expose:
@@ -42,7 +45,8 @@ services:
     pull_policy: never
     env_file: .env
     networks:
-      - localnet
+      localnet:
+        ipv4_address: 172.16.0.3
     volumes:
       - wp-volume:/var/www/html
     expose:
@@ -58,7 +62,8 @@ services:
     container_name: nginx
     pull_policy: never
     networks:
-      - localnet
+      localnet:
+        ipv4_address: 172.16.0.4
     volumes:
       - wp-volume:/var/www/html
     ports:
