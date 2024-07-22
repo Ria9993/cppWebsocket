@@ -25,11 +25,11 @@ echo "Checked MariaDB alive."
 
 rm -f /var/www/html/wp-config.php
 chown -R www-data:www-data /var/www/html
-/wp-cli.phar config create --allow-root --dbname="$DB_NAME" --dbuser="$DB_USER" --dbpass="$DB_USER_PW" --dbhost="$DB_HOST" --dbcharset=utf8mb4 --path=/var/www/html
+/usr/bin/wp config create --allow-root --dbname="$DB_NAME" --dbuser="$DB_USER" --dbpass="$DB_USER_PW" --dbhost="$DB_HOST" --dbcharset=utf8mb4 --path=/var/www/html
 
-/wp-cli.phar core install --url="$WP_URL" --title="$WP_TITLE" --admin_user="$WP_ADMIN" --admin_password="$WP_ADMIN_PW" --admin_email="$WP_ADMIN_EMAIL" --skip-email --path=/var/www/html --allow-root
+/usr/bin/wp core install --url="$WP_URL" --title="$WP_TITLE" --admin_user="$WP_ADMIN" --admin_password="$WP_ADMIN_PW" --admin_email="$WP_ADMIN_EMAIL" --skip-email --path=/var/www/html --allow-root
 
-/wp-cli.phar user create "$WP_USER" "$WP_USER_EMAIL" --role=author --user_pass="$WP_USER_PW" --allow-root --path=/var/www/html
+/usr/bin/wp user create "$WP_USER" "$WP_USER_EMAIL" --role=author --user_pass="$WP_USER_PW" --allow-root --path=/var/www/html
 
 if [ ! -f "/var/www/html/wp-config.php" ]; then
 	exit 1
