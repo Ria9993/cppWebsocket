@@ -1,4 +1,4 @@
-FROM alpine:3.18.6
+FROM alpine:3.19.2
 
 RUN apk update && apk upgrade && apk add curl mariadb-client wget php82 php82-fpm php82-phar php82-json php82-mysqli php82-curl php82-iconv php81-pecl-mailparse&& mv /usr/bin/php82 /usr/bin/php
 

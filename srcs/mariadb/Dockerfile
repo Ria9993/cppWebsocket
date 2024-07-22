@@ -1,4 +1,4 @@
-FROM alpine:3.18.6
+FROM alpine:3.19.2
 
 WORKDIR /
 # COPY ./config/my.cnf /etc/.
