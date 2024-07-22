@@ -4,6 +4,8 @@ FROM debian:buster
 RUN apt update && apt install -y \
     dumb-init mariadb-server mariadb-common mariadb-client mysql-common
 
+RUN /usr/bin/mysql_install_db --datadir=/var/lib/mysql/data --auth-root-authentication-method=normal
+
 RUN mkdir -p /run/mysqld/\
 && mkdir -p /var/lib/mysql/data/\
 \
@@ -20,7 +22,6 @@ RUN mkdir -p /run/mysqld/\
 && chown -R root:mysql /run/mysqld\
 && chown -R root:mysql /var/lib/mysql\
 \
-&& /usr/bin/mysql_install_db --basedir=/var/lib/mysql --datadir=/var/lib/mysql/data --auth-root-authentication-method=normal\
 && rm -f /etc/my.cnf.d/mariadb-server.cnf
     
 COPY ./50-server.cnf /etc/my.cnf.d/mariadb-server.cnf
