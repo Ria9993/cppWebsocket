@@ -11,7 +11,10 @@ RUN mkdir -p /var/run/mysqld/\
 \
 && chmod 755 -R /var/lib/mysql\
 \
-&& ln -s /tmp/mysql.sock /var/lib/mysql/mysql.sock\
+&& touch /var/run/mysqld/mysqld.sock\
+&& chmod 755 /var/run/mysqld/mysqld.sock\
+&& chown root:mysql /var/run/mysqld/mysqld.sock\
+&& mysql -u root -p mysql -S /var/lib/mysql/mysql.sock\
 \
 && touch /var/log/mysqld.log\
 && chmod 660 /var/log/mysqld.log\
