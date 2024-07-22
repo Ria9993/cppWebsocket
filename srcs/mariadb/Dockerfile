@@ -11,7 +11,7 @@ RUN apk update\
 && chmod +x /usr/local/bin/dumb-init\
 && mariadb-install-db --datadir=/var/lib/mysql/data --auth-root-authentication-method=normal\
 \
-&& chmod 755 /tmp/entry.sh\
+&& chmod 755 /tmp/Startup.sh\
 \
 && mkdir -p /run/mysqld/\
 && mkdir -p /var/lib/mysql/data/\
