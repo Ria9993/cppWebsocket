@@ -46,7 +46,7 @@ services:
     env_file: .env
     networks:
       localnet:
-        ipv4_address: 172.16.0.3
+        ipv4_address: 172.16.0.7
     volumes:
       - wp-volume:/var/www/html
     expose:
@@ -63,7 +63,7 @@ services:
     pull_policy: never
     networks:
       localnet:
-        ipv4_address: 172.16.0.4
+        ipv4_address: 172.16.0.6
     volumes:
       - wp-volume:/var/www/html
     ports:
