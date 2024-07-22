@@ -21,15 +21,14 @@ RUN apt update && apt install -y \
 \
 && rm -f /etc/my.cnf.d/mariadb-server.cnf
     
-# RUN mariadb-install-db --datadir=/var/lib/mysql/data --auth-root-authentication-method=normal
+RUN mariadb-install-db --datadir=/var/lib/mysql/data --auth-root-authentication-method=normal
 
 COPY ./Startup.sh /tmp/.
 RUN chmod +x /tmp/Startup.sh
 
+COPY ./50-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 RUN mysql_install_db
 
-COPY ./50-server.cnf /tmp/.
-COPY ./50-server.cnf /etc/mysql/mariadb.conf.d/.
 
 EXPOSE 3306
 
