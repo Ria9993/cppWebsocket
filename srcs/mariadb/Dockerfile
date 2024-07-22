@@ -11,15 +11,15 @@ RUN mkdir -p /run/mysqld/\
 \
 && chmod 755 -R /var/lib/mysql\
 \
-&& touch /run/mysqld/mysqld.sock\
-&& chmod 755 /run/mysqld/mysqld.sock\
-&& chown root:mysql /run/mysqld/mysqld.sock\
+&& touch /var/run/mysqld/mysqld.sock\
+&& chmod 755 /var/run/mysqld/mysqld.sock\
+&& chown root:mysql /var/run/mysqld/mysqld.sock\
 \
 && touch /var/log/mysqld.log\
 && chmod 660 /var/log/mysqld.log\
 && chown root:mysql /var/log/mysqld.log\
 \
-&& chown -R root:mysql /run/mysqld\
+&& chown -R root:mysql /var/run/mysqld\
 && chown -R root:mysql /var/lib/mysql\
 \
 && rm -f /etc/my.cnf.d/mariadb-server.cnf
