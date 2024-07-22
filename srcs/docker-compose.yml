@@ -28,7 +28,7 @@ services:
     networks:
       - localnet
     volumes:
-      - db-volume:/var/lib/mysql
+      - db-volume:/var/lib/mysql/data
     expose:
       - 3306
     restart: unless-stopped

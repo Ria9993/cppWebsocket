@@ -1,41 +1,40 @@
+FROM alpine:3.18.6
 
-FROM debian:buster
+WORKDIR /
+# COPY ./config/my.cnf /etc/.
+COPY ./Startup.sh /tmp/.
 
-RUN apt update && apt install -y \
-    dumb-init mariadb-server mariadb-common mariadb-client mysql-common
-
-RUN /usr/bin/mysql_install_db --datadir=/var/lib/mysql/data --auth-root-authentication-method=normal
-
-RUN mkdir -p /var/run/mysqld/\
+RUN apk update\
+&& apk upgrade\
+&& apk add --no-cache mariadb mariadb-client\
+&& wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_x86_64\
+&& chmod +x /usr/local/bin/dumb-init\
+&& mariadb-install-db --datadir=/var/lib/mysql/data --auth-root-authentication-method=normal\
+\
+&& chmod 755 /tmp/entry.sh\
+\
+&& mkdir -p /run/mysqld/\
 && mkdir -p /var/lib/mysql/data/\
 \
 && chmod 755 -R /var/lib/mysql\
 \
-&& touch /var/run/mysqld/mysqld.sock\
-&& chmod 755 /var/run/mysqld/mysqld.sock\
-&& chown root:mysql /var/run/mysqld/mysqld.sock\
+&& touch /run/mysqld/mysqld.sock\
+&& chmod 755 /run/mysqld/mysqld.sock\
+&& chown root:mysql /run/mysqld/mysqld.sock\
 \
 && touch /var/log/mysqld.log\
 && chmod 660 /var/log/mysqld.log\
 && chown root:mysql /var/log/mysqld.log\
 \
-&& chown -R root:mysql /var/run/mysqld\
+&& chown -R root:mysql /run/mysqld\
 && chown -R root:mysql /var/lib/mysql\
 \
 && rm -f /etc/my.cnf.d/mariadb-server.cnf
-    
+
 COPY ./50-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
-COPY ./Startup.sh /tmp/.
-RUN chmod +x /tmp/Startup.sh
+# ENTRYPOINT ["sh"]
+STOPSIGNAL SIGQUIT
 
-# RUN mysql_install_db
-
-
-EXPOSE 3306
-
-# CMD /usr/bin/mysqld_safe --syslog
-
-ENTRYPOINT ["/usr/bin/dumb-init","--"]
-CMD        ["sh", "-c", "/tmp/Startup.sh"]
-
+ENTRYPOINT	[ "/usr/local/bin/dumb-init", "--" ]
+CMD			[ "sh", "-c", "/tmp/Startup.sh" ]

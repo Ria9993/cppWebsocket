@@ -2,20 +2,14 @@
 
 [mysqld_safe]
 nice = 0
-socket = /var/lib/mysql/mysql.sock
-
-[client]
-socket = /var/lib/mysql/mysql.sock
 
 [mysqld]
 user=root
 port=3306
 
-# set db directory
+# 데이터베이스들이 저장되는 경로 설정. datadir=/var/lib/mysql => datadir=/var/lib/mysql/data
 datadir=/var/lib/mysql/data
-
-[mysqld]
-socket = /var/lib/mysql/mysql.sock
+socket=/run/mysqld/mysqld.sock
 
 skip-networking=0
 bind-address=0.0.0.0
