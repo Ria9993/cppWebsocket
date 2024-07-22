@@ -20,7 +20,7 @@ until mysql --host=$DB_HOST --user=$DB_USER --password=$DB_USER_PWD -e '\c'; do
     echo "MariaDB is not ready. (WaitTime=${POLLING_COUNTER})"
     exit 1
   fi
-  sleep sleep ${POLLING_INTERVAL}
+  sleep ${POLLING_INTERVAL}
 done
 echo "Checked MariaDB alive."
 
