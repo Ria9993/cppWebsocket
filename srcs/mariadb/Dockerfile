@@ -1,10 +1,25 @@
 
 FROM debian:buster
 
-RUN apt update -y
-RUN apt install -y \
-    mariadb-server
-RUN apt install -y dumb-init
+RUN apt update && apt install -y \
+    mariadb-server dumb-init && \
+&& mkdir -p /run/mysqld/\
+&& mkdir -p /var/lib/mysql/data/\
+\
+&& chmod 755 -R /var/lib/mysql\
+\
+&& touch /run/mysqld/mysqld.sock\
+&& chmod 755 /run/mysqld/mysqld.sock\
+&& chown root:mysql /run/mysqld/mysqld.sock\
+\
+&& touch /var/log/mysqld.log\
+&& chmod 660 /var/log/mysqld.log\
+&& chown root:mysql /var/log/mysqld.log\
+\
+&& chown -R root:mysql /run/mysqld\
+&& chown -R root:mysql /var/lib/mysql\
+\
+&& rm -f /etc/my.cnf.d/mariadb-server.cnf
     
 # RUN mariadb-install-db --datadir=/var/lib/mysql/data --auth-root-authentication-method=normal
 
