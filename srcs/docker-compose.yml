@@ -61,7 +61,4 @@ services:
       - wp-volume:/var/www/html
     ports:
       - "443:443"
-    depends_on:
-      - wordpress
-      - mariadb
     restart: unless-stopped
