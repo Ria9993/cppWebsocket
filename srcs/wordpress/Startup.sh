@@ -2,10 +2,10 @@
 
 PHP_VERSION=php82
 PHP_FPM_POOL_CONF="/etc/$PHP_VERSION/php-fpm.d/www.conf"
-echo "env[DB_NAME] = $DB_NAME" >> ${PHP_FPM_POOL_CONF}
-echo "env[DB_HOST] = $DB_HOST" >> ${PHP_FPM_POOL_CONF}
-echo "env[DB_USER] = $DB_USER" >> ${PHP_FPM_POOL_CONF}
-echo "env[DB_USER_PW] = $DB_USER_PW" >> ${PHP_FPM_POOL_CONF}
+echo "env[DB_HOST] = \$DB_HOST" >> /etc/php82/php-fpm.d/www.conf
+echo "env[DB_USER] = \$DB_USER" >> /etc/php82/php-fpm.d/www.conf
+echo "env[DB_USER_PWD] = \$DB_USER_PWD" >> /etc/php82/php-fpm.d/www.conf
+echo "env[DB_NAME] = \$DB_NAME" >> /etc/php82/php-fpm.d/www.conf
 
 # @see https://dev.mysql.com/doc/refman/8.0/en/mysqladmin.html
 POLLING_INTERVAL=1
