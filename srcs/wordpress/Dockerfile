@@ -1,4 +1,4 @@
-FROM debian:11
+FROM debian:buster
 
 RUN apt update -y && apt install -y \
 curl wget php8.2 php8.2-fpm php8.2-cgi php8.2-phar php8.2-mysqli php8.2-curl php8.2-iconv mariadb-client
