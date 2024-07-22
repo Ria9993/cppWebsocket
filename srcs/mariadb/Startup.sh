@@ -26,9 +26,9 @@ if [ ! -d /var/lib/mysql/data/$DB_NAME ]; then
 
   mysql -e "\
     CREATE DATABASE IF NOT EXISTS ${DB_TABLE_WORDPRESS} DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci; \
-    CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_USER_PWD}'; \
-    GRANT ALL ON ${DB_TABLE_WORDPRESS}.* TO '${DB_USER}'@'%'; \
-    ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ADMIN_PWD}'; \
+    CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_USER_PW}'; \
+    GRANT ALL ON ${DB_NAME}.* TO '${DB_USER}'@'%'; \
+    ALTER USER '${DB_ADMIN}'@'localhost' IDENTIFIED BY '{$DB_ADMIN_PW}'; \
     FLUSH PRIVILEGES; \
     "
   mysqladmin --user=root shutdown
