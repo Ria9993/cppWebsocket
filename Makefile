@@ -4,8 +4,8 @@ all : $(NAME)
 $(NAME) :
 	sudo mkdir -p /home/hyunjunk/vol_inception/data/db
 	sudo mkdir -p /home/hyunjunk/vol_inception/data/wp
-	# sudo chmod 777 /etc/hosts
-	# sudo echo "127.0.0.1 hyunjunk.42.fr" >> /etc/hosts
+	sudo chmod 777 /etc/hosts
+	sudo echo "127.0.0.1 hyunjunk.42.fr" >> /etc/hosts
 	docker compose --env-file srcs/.env -f srcs/docker-compose.yml up --detach
 
 
@@ -28,7 +28,7 @@ fclean : clean
 	docker system prune --volumes --all --force
 	docker network prune --force
 	docker volume prune --force
-	# sudo sed -i "/127.0.0.1 hyunjunk.42.fr/d" /etc/hosts
+	sudo sed -i "/127.0.0.1 hyunjunk.42.fr/d" /etc/hosts
 
 re : fclean all
 
