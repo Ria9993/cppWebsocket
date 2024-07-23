@@ -11,13 +11,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${VOLUME_BASE_PATH}/data/db
+      device: ${VOLUME_BASE_PATH}/db
   wp-volume:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${VOLUME_BASE_PATH}/data/wp
+      device: ${VOLUME_BASE_PATH}/wp
 
 
 services:
